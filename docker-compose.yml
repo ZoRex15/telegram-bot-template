@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+
+  tg_bot:
+    image: "telegram-bot-template:latest"
+    depends_on:
+      - db
+      - migrations-db
+    env_file:
+      - .env
+    entrypoint: [ "python", "-m", "app.main.bot" ]
+
+  db:
+    image: "postgres:16.2-alpine3.19"
+    volumes:
+      - postgres_docker_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "${DB_PATH}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d ${DB_PATH} -U ${DB_USER}" ]
+      interval: 2s
+      timeout: 60s
+      retries: 10
+      start_period: 5s
+
+  migrations-db:
+    image: "telegram-bot-template:latest"
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: [ "alembic", "upgrade", "head" ]
+
+volumes:
+  postgres_docker_data:
