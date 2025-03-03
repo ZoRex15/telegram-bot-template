@@ -36,7 +36,10 @@ class NatsConfig(BaseModel):
     password: SecretStr | None = None
 
     def build_connection_url(self) -> str:
-        return f"nats://{self.user}:{self.password.get_secret_value()}@{self.host}:{self.port}"
+        return (
+            f"nats://{self.user}:{self.password.get_secret_value() if self.password else ''}"
+            f"@{self.host}:{self.port}"
+        )
     
 class DebugConfig(BaseModel):
     log_level: int = 10

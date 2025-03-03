@@ -36,5 +36,24 @@ services:
         condition: service_healthy
     entrypoint: [ "alembic", "upgrade", "head" ]
 
+  nats:
+    image: "nats:latest"
+    volumes:
+      - /nats_docker_data/data:/data
+      - ./nats/config:/config
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    command: "-c /config/server.conf"
+
+  migrations-nats:
+    image: "telegram-bot-template:latest"
+    depends_on:
+      - nats
+    env_file:
+      - .env
+    entrypoint: [ "python", "-m", "nats.migration" ]
+
 volumes:
   postgres_docker_data:
+  nats_docker_data:

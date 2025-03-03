@@ -7,6 +7,8 @@ from .config import ConfigProvider
 from .db import DatabaseProvider
 from .repository import RepositoryProvider
 from .interactors import InteractorsProvider
+from .utils import UtilsProvider
+from .fast_stream import FastStreamProvider
 
 
 def get_bot_providers() -> List[Provider]:
@@ -16,7 +18,9 @@ def get_bot_providers() -> List[Provider]:
         ConfigProvider(),
         DatabaseProvider(),
         RepositoryProvider(),
-        InteractorsProvider()
+        InteractorsProvider(),
+        UtilsProvider(),
+        FastStreamProvider()
     ]
 
 def get_stream_providers() -> List[Provider]:
@@ -25,7 +29,9 @@ def get_stream_providers() -> List[Provider]:
         ConfigProvider(),
         DatabaseProvider(),
         RepositoryProvider(),
-        InteractorsProvider()
+        InteractorsProvider(),
+        UtilsProvider(),
+        FastStreamProvider()
     ]
 
 

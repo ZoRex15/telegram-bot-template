@@ -7,7 +7,10 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.base import BaseStorage
 from aiogram.fsm.storage.memory import MemoryStorage
 
+from aiogram_dialog import setup_dialogs
+
 from app.presentation.tg_bot.handlers import handler_router
+from app.presentation.tg_bot.dialogs.mailing.dialogs import mailing_dialog
 from app.presentation.tg_bot.middlewares import LoadMiddleware
 from app.infrastructure.config import BotConfig
 
@@ -30,9 +33,13 @@ class DispatcherProvider(Provider):
     @provide
     def get_dispatcher(self, dishka: AsyncContainer) -> Dispatcher:
         dp = Dispatcher()
-        dp.include_router(handler_router)
+        dp.include_routers(
+            handler_router, 
+            mailing_dialog
+        )
         dp.update.middleware(LoadMiddleware())
         setup_dishka(dishka, dp, auto_inject=True)
+        setup_dialogs(dp)
         return dp
 
     @provide

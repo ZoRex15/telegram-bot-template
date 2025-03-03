@@ -28,16 +28,17 @@ class CreateUser(Interactor):
         self.uow = uow
 
     async def __call__(self, data: CreateUserDTO) -> UserDTO:
-        user = await self.repository.create_user(
-            UserDTO(
-                tg_id=data.tg_id,
-                first_name=data.first_name,
-                last_name=data.last_name,
-                username=data.username,
-                created_at=data.created_at,
-                id=None
+        async with self.uow:
+            user = await self.repository.create_user(
+                UserDTO(
+                    tg_id=data.tg_id,
+                    first_name=data.first_name,
+                    last_name=data.last_name,
+                    username=data.username,
+                    created_at=data.created_at,
+                    id=None
+                )
             )
-        )
-        await self.uow.commit()
-        logger.info("New user created", extra={"user": user})
-        return user
+            await self.uow.commit()
+            logger.info("New user created", extra={"user": user})
+            return user

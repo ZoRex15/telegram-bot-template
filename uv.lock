@@ -28,6 +28,20 @@ wheels = [
 ]
 
 [[package]]
+name = "aiogram-dialog"
+version = "2.3.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "aiogram" },
+    { name = "cachetools" },
+    { name = "jinja2" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7d/a2/3a901b0d1108e524acca0c0c86ddfa4752d65b1ad951610804ac0ab9de3e/aiogram_dialog-2.3.1.tar.gz", hash = "sha256:ec340c88c22a6e3c1777adf7f96f46c7429b5a4575c50fec79da53def6ae6770", size = 78995 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5e/7b/c5f24d154a9d367a8204b014fef25f3076bf48e35b524038f499013173ee/aiogram_dialog-2.3.1-py3-none-any.whl", hash = "sha256:9c780f1768ac12f6a2e559fe74c72b1de410bbf56aa0af1ee7cf2e6d70276cb5", size = 111607 },
+]
+
+[[package]]
 name = "aiohappyeyeballs"
 version = "2.4.4"
 source = { registry = "https://pypi.org/simple" }
@@ -186,6 +200,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/48/c8/6260f8ccc11f0917360fc0da435c5c9c7504e3db174d5a12a1494887b045/attrs-24.3.0.tar.gz", hash = "sha256:8f5c07333d543103541ba7be0e2ce16eeee8130cb0b3f9238ab904ce1e85baff", size = 805984 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/89/aa/ab0f7891a01eeb2d2e338ae8fecbe57fcebea1a24dbb64d45801bfab481d/attrs-24.3.0-py3-none-any.whl", hash = "sha256:ac96cd038792094f438ad1f6ff80837353805ac950cd2aa0e0625ef19850c308", size = 63397 },
+]
+
+[[package]]
+name = "cachetools"
+version = "5.5.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d9/74/57df1ab0ce6bc5f6fa868e08de20df8ac58f9c44330c7671ad922d2bbeae/cachetools-5.5.1.tar.gz", hash = "sha256:70f238fbba50383ef62e55c6aff6d9673175fe59f7c6782c7a0b9e38f4a9df95", size = 28044 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ec/4e/de4ff18bcf55857ba18d3a4bd48c8a9fde6bb0980c9d20b263f05387fd88/cachetools-5.5.1-py3-none-any.whl", hash = "sha256:b76651fdc3b24ead3c648bbdeeb940c1b04d365b38b4af66788f9ec4a81d42bb", size = 9530 },
 ]
 
 [[package]]
@@ -354,6 +377,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f1/70/7703c29685631f5a7590aa73f1f1d3fa9a380e654b86af429e0934a32f7d/idna-3.10.tar.gz", hash = "sha256:12f65c9b470abda6dc35cf8e63cc574b1c52b11df2c86030af0ac09b01b13ea9", size = 190490 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl", hash = "sha256:946d195a0d259cbba61165e88e65941f16e9b36ea6ddb97f00452bae8b1287d3", size = 70442 },
+]
+
+[[package]]
+name = "jinja2"
+version = "3.1.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "markupsafe" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/af/92/b3130cbbf5591acf9ade8708c365f3238046ac7cb8ccba6e81abccb0ccff/jinja2-3.1.5.tar.gz", hash = "sha256:8fefff8dc3034e27bb80d67c671eb8a9bc424c0ef4c0826edbff304cceff43bb", size = 244674 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bd/0f/2ba5fbcd631e3e88689309dbe978c5769e883e4b84ebfe7da30b43275c5a/jinja2-3.1.5-py3-none-any.whl", hash = "sha256:aba0f4dc9ed8013c424088f68a5c226f7d6097ed89b246d7749c2ec4175c6adb", size = 134596 },
 ]
 
 [[package]]
@@ -700,6 +735,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "aiogram" },
+    { name = "aiogram-dialog" },
     { name = "alembic" },
     { name = "asyncpg" },
     { name = "dishka" },
@@ -707,11 +743,13 @@ dependencies = [
     { name = "faststream", extra = ["nats"] },
     { name = "sqlalchemy" },
     { name = "structlog" },
+    { name = "tenacity" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "aiogram", specifier = ">=3.17.0" },
+    { name = "aiogram-dialog", specifier = ">=2.3.1" },
     { name = "alembic", specifier = ">=1.14.0" },
     { name = "asyncpg", specifier = ">=0.30.0" },
     { name = "dishka", specifier = ">=1.4.2" },
@@ -719,6 +757,16 @@ requires-dist = [
     { name = "faststream", extras = ["nats"], specifier = ">=0.5.34" },
     { name = "sqlalchemy", specifier = ">=2.0.37" },
     { name = "structlog", specifier = ">=24.4.0" },
+    { name = "tenacity", specifier = ">=9.0.0" },
+]
+
+[[package]]
+name = "tenacity"
+version = "9.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/cd/94/91fccdb4b8110642462e653d5dcb27e7b674742ad68efd146367da7bdb10/tenacity-9.0.0.tar.gz", hash = "sha256:807f37ca97d62aa361264d497b0e31e92b8027044942bfa756160d908320d73b", size = 47421 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b6/cb/b86984bed139586d01532a587464b5805f12e397594f19f931c4c2fbfa61/tenacity-9.0.0-py3-none-any.whl", hash = "sha256:93de0c98785b27fcf659856aa9f54bfbd399e29969b0621bc7f762bd441b4539", size = 28169 },
 ]
 
 [[package]]

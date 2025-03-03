@@ -9,6 +9,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "aiogram>=3.17.0",
+    "aiogram-dialog>=2.3.1",
     "alembic>=1.14.0",
     "asyncpg>=0.30.0",
     "dishka>=1.4.2",
@@ -16,6 +17,7 @@ dependencies = [
     "faststream[nats]>=0.5.34",
     "sqlalchemy>=2.0.37",
     "structlog>=24.4.0",
+    "tenacity>=9.0.0",
 ]
 
 [build-system]

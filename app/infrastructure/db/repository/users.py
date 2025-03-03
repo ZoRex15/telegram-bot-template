@@ -1,3 +1,5 @@
+from typing import Sequence
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -38,6 +40,15 @@ class UsersRepository:
         ).scalar()
         return user.to_dto() if user else None
     
+    async def get_all(self) -> Sequence[UserDTO]:
+        users = (
+            await self.session.execute(
+                select(User)
+            )
+        ).scalars().all()
+        return tuple(i.to_dto() for i in users)
+
+        
     
 
         
